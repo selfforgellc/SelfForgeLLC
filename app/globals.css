@@ -5,31 +5,59 @@
   padding: 0;
 }
 
-/* COLOR SYSTEM (FROM OLD SITE) */
+/* SELF FORGE COLORS — FROM OLD SITE */
 :root {
-  --bg-primary: #0e0e10;
-  --bg-secondary: #151518;
-  --border-subtle: #242428;
-
-  --text-primary: #e6e6e6;
-  --text-secondary: #b2b2b2;
-  --text-muted: #8a8a8a;
-
-  --accent-red: #9b2c2c;
+  --sf-red: #e50914;
+  --sf-dark: #0b0b0b;
 }
 
 /* BASE */
 html,
 body {
   height: 100%;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  width: 100%;
+  color: white;
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
 }
 
-/* PAGE */
+/* IMPORTANT: BODY BACKGROUND LAYER */
+body {
+  position: relative;
+  background: radial-gradient(
+    circle at 50% 20%,
+    var(--sf-dark) 0%,
+    #000 80%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* EDGE DARKENING MASK — THIS IS WHAT YOU WERE MISSING */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    transparent 60%,
+    #000 100%
+  );
+  z-index: -1;
+}
+
+/* FORCE ALL LAYOUT CONTAINERS TO BE TRANSPARENT */
+main,
+section,
+div {
+  background-color: transparent !important;
+}
+
+/* PAGE WRAPPER */
 .page {
   min-height: 100vh;
   max-width: 1000px;
@@ -47,7 +75,7 @@ body {
 
 .tagline {
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   max-width: 640px;
 }
 
@@ -58,7 +86,7 @@ body {
 
 .product {
   padding: 22px 0;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .product:first-child {
@@ -73,7 +101,7 @@ body {
 .product p {
   font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   max-width: 760px;
 }
 
@@ -81,19 +109,19 @@ body {
   opacity: 0.6;
 }
 
-/* FOOTER */
-.footer {
-  margin-top: 96px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* OPTIONAL ACCENT (SUBTLE, VERY SELF FORGE) */
+/* SUBTLE SELF FORGE RED ACCENT */
 .product h2::after {
   content: "";
   display: block;
   width: 28px;
   height: 2px;
-  background-color: var(--accent-red);
+  background-color: var(--sf-red);
   margin-top: 6px;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 96px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
 }
